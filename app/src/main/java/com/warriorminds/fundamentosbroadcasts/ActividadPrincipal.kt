@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.LocalBroadcastManager
 import android.widget.Toast
+import com.warriorminds.fundamentosbroadcasts.receivers.CambioBateriaReceiver
 import com.warriorminds.fundamentosbroadcasts.receivers.ModoAvionReceiver
 import com.warriorminds.fundamentosbroadcasts.receivers.PrimerReceiver
 import kotlinx.android.synthetic.main.actividad_principal.*
@@ -20,6 +21,7 @@ class ActividadPrincipal : AppCompatActivity() {
     private val ACCION_PRIMER_BROADCAST = "com.warriorminds.broadcast.PRIMER_BROADCAST"
     private val primerReceiver = PrimerReceiver()
     private val modoAvionReceiver = ModoAvionReceiver()
+    private val cambioBateriaReceiver = CambioBateriaReceiver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,11 +42,15 @@ class ActividadPrincipal : AppCompatActivity() {
         super.onStart()
         val modoAvionIntentFilter = IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)
         registerReceiver(modoAvionReceiver, modoAvionIntentFilter)
+
+        val cambioBateriaIntentFilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
+        registerReceiver(cambioBateriaReceiver, cambioBateriaIntentFilter)
     }
 
     override fun onStop() {
         super.onStop()
         unregisterReceiver(modoAvionReceiver)
+        unregisterReceiver(cambioBateriaReceiver)
     }
 
     private fun registrarPrimerBroadcast() {
