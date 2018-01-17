@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.content.LocalBroadcastManager
 import android.widget.Toast
+import com.warriorminds.fundamentosbroadcasts.receivers.ModoAvionReceiver
 import com.warriorminds.fundamentosbroadcasts.receivers.PrimerReceiver
 import kotlinx.android.synthetic.main.actividad_principal.*
 import java.util.*
@@ -18,6 +19,7 @@ class ActividadPrincipal : AppCompatActivity() {
 
     private val ACCION_PRIMER_BROADCAST = "com.warriorminds.broadcast.PRIMER_BROADCAST"
     private val primerReceiver = PrimerReceiver()
+    private val modoAvionReceiver = ModoAvionReceiver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +34,17 @@ class ActividadPrincipal : AppCompatActivity() {
         botonEnviarPrimerBroadcast.setOnClickListener {
             enviarPrimerBroadcast()
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val modoAvionIntentFilter = IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)
+        registerReceiver(modoAvionReceiver, modoAvionIntentFilter)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(modoAvionReceiver)
     }
 
     private fun registrarPrimerBroadcast() {
