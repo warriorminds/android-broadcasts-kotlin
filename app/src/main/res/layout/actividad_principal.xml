@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,4 +8,27 @@
     android:orientation="vertical"
     tools:context="com.warriorminds.fundamentosbroadcasts.ActividadPrincipal">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Primer Broadcast"/>
+
+    <Button
+        android:id="@+id/botonRegistrarPrimerBroadcast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registrar Primer Broadcast"/>
+
+    <Button
+        android:id="@+id/botonDesregistrarPrimerBroadcast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Desregistrar Primer Broadcast"/>
+
+    <Button
+        android:id="@+id/botonEnviarPrimerBroadcast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enviar Primer Broadcast"/>
+
+</LinearLayout>
