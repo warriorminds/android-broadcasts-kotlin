@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.warriorminds.fundamentosbroadcasts.receivers.CambioBateriaReceiver
 import com.warriorminds.fundamentosbroadcasts.receivers.ModoAvionReceiver
 import com.warriorminds.fundamentosbroadcasts.receivers.PrimerReceiver
+import com.warriorminds.fundamentosbroadcasts.receivers.ReceiverAsincrono
 import kotlinx.android.synthetic.main.actividad_principal.*
 import java.util.*
 
@@ -20,10 +21,12 @@ class ActividadPrincipal : AppCompatActivity() {
 
     private val ACCION_PRIMER_BROADCAST = "com.warriorminds.broadcast.PRIMER_BROADCAST"
     private val ACCION_BROADCAST_ORDENADO = "com.warriorminds.broadcast.ACCION_ORDENADOS"
+    private val ACCION_BROADCAST_ASINCRONO = "com.warriorminds.broadcast.ACCION_ASINCRONO"
 
     private val primerReceiver = PrimerReceiver()
     private val modoAvionReceiver = ModoAvionReceiver()
     private val cambioBateriaReceiver = CambioBateriaReceiver()
+    private val receiverAsincrono = ReceiverAsincrono()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +44,9 @@ class ActividadPrincipal : AppCompatActivity() {
         botonEnviarBroadcastOrdenado.setOnClickListener {
             enviarBroadcastOrdenado()
         }
+        botonBroadcastAsicrono.setOnClickListener {
+            enviarBroadcastAsíncrono()
+        }
     }
 
     override fun onStart() {
@@ -50,12 +56,16 @@ class ActividadPrincipal : AppCompatActivity() {
 
         val cambioBateriaIntentFilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
         registerReceiver(cambioBateriaReceiver, cambioBateriaIntentFilter)
+
+        val asincronoIntentFilter = IntentFilter(ACCION_BROADCAST_ASINCRONO)
+        registerReceiver(receiverAsincrono, asincronoIntentFilter)
     }
 
     override fun onStop() {
         super.onStop()
         unregisterReceiver(modoAvionReceiver)
         unregisterReceiver(cambioBateriaReceiver)
+        unregisterReceiver(receiverAsincrono)
     }
 
     private fun registrarPrimerBroadcast() {
@@ -79,5 +89,10 @@ class ActividadPrincipal : AppCompatActivity() {
     private fun enviarBroadcastOrdenado() {
         val intent = Intent(ACCION_BROADCAST_ORDENADO)
         sendOrderedBroadcast(intent, null)
+    }
+
+    private fun enviarBroadcastAsíncrono() {
+        val intent = Intent(ACCION_BROADCAST_ASINCRONO)
+        sendBroadcast(intent)
     }
 }
