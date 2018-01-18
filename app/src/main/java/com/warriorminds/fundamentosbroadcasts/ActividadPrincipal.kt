@@ -19,6 +19,8 @@ class ActividadPrincipal : AppCompatActivity() {
     }
 
     private val ACCION_PRIMER_BROADCAST = "com.warriorminds.broadcast.PRIMER_BROADCAST"
+    private val ACCION_BROADCAST_ORDENADO = "com.warriorminds.broadcast.ACCION_ORDENADOS"
+
     private val primerReceiver = PrimerReceiver()
     private val modoAvionReceiver = ModoAvionReceiver()
     private val cambioBateriaReceiver = CambioBateriaReceiver()
@@ -35,6 +37,9 @@ class ActividadPrincipal : AppCompatActivity() {
         }
         botonEnviarPrimerBroadcast.setOnClickListener {
             enviarPrimerBroadcast()
+        }
+        botonEnviarBroadcastOrdenado.setOnClickListener {
+            enviarBroadcastOrdenado()
         }
     }
 
@@ -69,5 +74,10 @@ class ActividadPrincipal : AppCompatActivity() {
         intent.action = ACCION_PRIMER_BROADCAST
         intent.putExtra(NUMERO_ALEATORIO, Random().nextInt(1000))
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+    }
+
+    private fun enviarBroadcastOrdenado() {
+        val intent = Intent(ACCION_BROADCAST_ORDENADO)
+        sendOrderedBroadcast(intent, null)
     }
 }
