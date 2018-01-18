@@ -31,4 +31,10 @@
         android:layout_height="wrap_content"
         android:text="Enviar Primer Broadcast"/>
 
+    <Button
+        android:id="@+id/botonEnviarBroadcastOrdenado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enviar Broadcast Ordenado"/>
+
 </LinearLayout>

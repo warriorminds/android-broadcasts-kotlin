@@ -22,6 +22,21 @@
                 <action android:name="android.intent.action.LOCALE_CHANGED" />
             </intent-filter>
         </receiver>
+        <receiver android:name=".receivers.PrimerBroadcastOrdenado">
+            <intent-filter android:priority="3">
+                <action android:name="com.warriorminds.broadcast.ACCION_ORDENADOS" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".receivers.SegundoBroadcastOrdenado">
+            <intent-filter android:priority="2">
+                <action android:name="com.warriorminds.broadcast.ACCION_ORDENADOS" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".receivers.TercerBroadcastOrdenado">
+            <intent-filter android:priority="1">
+                <action android:name="com.warriorminds.broadcast.ACCION_ORDENADOS" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
